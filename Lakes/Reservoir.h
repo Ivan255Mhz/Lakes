@@ -1,33 +1,38 @@
 #pragma once
 #include <iostream>
-#include <vector>
-
-
-
+#include<string>
 
 class Reservoir
 {
-	
 	std::string NameReservoir;
 	double Length;
 	double Width;
 	double Depth;
-
-	
-	double SquareReservoir;
+    double SquareReservoir;
 	double WaterSurface;
 	std::string TypeOfReservoir;
 	
     
 public:
 
-	friend std::ostream& operator<< (std::ostream out, const Reservoir& obj);
+	friend std::ostream& operator<< (std::ostream& out, const Reservoir& obj);
 
 	Reservoir() : Length{ 0.0 }, Width{ 0.0 }, Depth{ 0.0 }, SquareReservoir{ getSquareReservoir() }, WaterSurface{ getWaterSurface() }, NameReservoir{"-"}
 	, TypeOfReservoir(getTypeOfReservoir()){}
 
+	Reservoir(std::string Name) : Reservoir() {
+		NameReservoir = Name;
+	}
+
 	Reservoir(double Length, double Width, double Depth) :Length{ Length }, Width{ Width }, Depth{Depth}, SquareReservoir{ getSquareReservoir() }, WaterSurface{ getWaterSurface() }, NameReservoir{ "-" }
 	, TypeOfReservoir(getTypeOfReservoir()) {} 
+
+	Reservoir(std::string Name,double Length, double Width, double Depth) :Length{ Length }, Width{ Width }, Depth{ Depth }, SquareReservoir{ getSquareReservoir() }, WaterSurface{ getWaterSurface() }, NameReservoir{ Name}
+		, TypeOfReservoir{ getTypeOfReservoir() } {}
+
+	void setName(std::string Name) {
+		NameReservoir = Name;
+	}
 
 	void setLength(double val) {
 		Length = val;
@@ -52,6 +57,10 @@ public:
 		return Depth;
 	}
 
+	std::string getNameReservoir() const {
+		return NameReservoir;
+	}
+
 	void print() const {
 		std::cout << "Назавание водоема - "<<NameReservoir << std::endl;
 		std::cout << "Длина - " << Length << std::endl;
@@ -61,6 +70,12 @@ public:
 		std::cout << "Обьем водоема - " << SquareReservoir << std::endl;
 		std::cout << "Прощадь водной поверхности - " << WaterSurface << std::endl;
 		
+	}
+
+	bool ComparisonOfTheWaterArea(Reservoir& obj) {
+		if (this->WaterSurface > obj.WaterSurface)
+			return true;
+		return false;
 	}
 
 private:
@@ -94,15 +109,10 @@ private:
 	}
 
 
-	bool ComparisonOfTheWaterArea(Reservoir& obj) {
-		if (this->WaterSurface > obj.WaterSurface)
-			return true;
-		return false;
-	}
+	
 };
 
-
-
-std::ostream& operator<< (std::ostream out, const Reservoir& obj);
+Reservoir Reservoir_Factory();
+	
 
 

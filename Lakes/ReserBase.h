@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+
 #include <vector>
 #include "Reservoir.h"
 #include<algorithm>
@@ -49,9 +49,22 @@ public:
 		std::ofstream out;
 		out.open("File.txt");
 		if (out.is_open()) {
+			cout << "File is open" << std::endl;
+			for (int i{}; i < base.size(); ++i) {
+				out << base[i] << endl;
+			}
+		}
+		out.close();
+		cout << "File is closed" << endl;
+	}
+
+	void Binary_File() const {
+		std::ofstream out;
+		out.open("Bin_file.txt", ios::binary);
+		if (out.is_open()) {
 			cout << "The file is open" << std::endl;
 			for (int i{}; i < base.size(); ++i) {
-				
+				out << base[i] << endl;
 			}
 		}
 		out.close();
@@ -64,5 +77,15 @@ public:
 	Reservoir operator[](int i) const  {
 		return base[i];
 	}
+
+	void DeleteByIndex(int i) {
+		base.erase(base.begin() + i);
+	}
 };
 
+
+void Removal(ReserBase & base);
+
+void Comparison(ReserBase & base);
+
+void SortBase(ReserBase& base);

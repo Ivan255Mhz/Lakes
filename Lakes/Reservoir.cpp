@@ -1,9 +1,9 @@
-#pragma once
+
 #include "Reservoir.h"
-#include <iostream>
 
 
-std::ostream& operator<< (std::ostream out, const Reservoir& obj) {
+
+std::ostream& operator<< (std::ostream& out, const Reservoir& obj) {
 
 	out << "Name - " << obj.NameReservoir << std::endl;
 	out << "Length - " << obj.Length << std::endl;
@@ -18,7 +18,28 @@ std::ostream& operator<< (std::ostream out, const Reservoir& obj) {
 	return out;
 }
 
+Reservoir Reservoir_Factory() {
+	std::string NameReservoir;
+	double Length{};
+	double Width{};
+	double Depth{};
+	system("cls");
+	std::cout << "¬ведите название водоема : ";
+	std::cin >> NameReservoir;
+	system("cls");
+	std::cout << "¬ведите длину водоема : ";
+	std::cin >> Length;
+	system("cls");
+	std::cout << "¬ведите ширину водоема : ";
+	std::cin >> Width;
+	system("cls");
+	std::cout << "¬ведите глубину водоема : ";
+	std::cin >> Depth;
+	system("cls");
 
+	Reservoir temp(NameReservoir, Length, Width, Depth);
+	return temp;
+}
 
 
 
